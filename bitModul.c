@@ -61,6 +61,7 @@ int isBigEndian(){
 	 */
 	if(*p == 1)//little-endian
 		return 0;
+		
 	else//big-endian
 		return 1;
 }

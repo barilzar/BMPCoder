@@ -1,7 +1,8 @@
 /*
-Purpose: This modul contains functions to help
-	 the process of reading and writing bitmap
-	 files.
+Purpose:
+	This modul contains functions to help
+	the process of reading and writing bitmap
+	files.
 
 Functions:
 	unsigned int skipBytes(FILE*, unsigned int)
@@ -12,10 +13,11 @@ Functions:
 	int writeToFile(BMP_FILE*, char*)
 	unsigned int dataSize(BMP_FILE*)
 
-Dependancies: Uses the functions:
-	      unsigned int toInteger(byte*)
-	      unsigned short toShort(byte*)
-	      from the bitModul-library.
+Dependancies:
+	Uses the functions:
+		unsigned int toInteger(byte*)
+	    unsigned short toShort(byte*)
+	    from the bitModul-library.
 */
 
 #define NOT_VALID_ERROR(p)\
@@ -54,13 +56,13 @@ Purpose: This enum is used to represent all the different
 	 specified by this enum.
 ********************************************/
 typedef enum{
-	NO_ERROR,			//No error in struct
-	NOT_VALID_BITMAP_ERROR,		//The file in the struct is not a valid bmp
-	NULL_FILE_ERROR,		//The stream in the struct is NULL
+	NO_ERROR,						//No error in struct
+	NOT_VALID_BITMAP_ERROR,			//The file in the struct is not a valid bmp
+	NULL_FILE_ERROR,				//The stream in the struct is NULL
 	UNSUPPORTED_MEMORY_FORMAT_ERROR,//The memory format in this machine is invalid
-	MEMORY_ALLOCATION_ERROR,	//A malloc operatio returnes NULL
-	FILE_WRITING_ERROR,		//There was an error while writing to a file
-	HEADER_NOT_PARSED		//The header needs to be parsed for this function
+	MEMORY_ALLOCATION_ERROR,		//A malloc operatio returnes NULL
+	FILE_WRITING_ERROR,				//There was an error while writing to a file
+	HEADER_NOT_PARSED				//The header needs to be parsed for this function
 }ERROR_NO;
 
 /********************************************
@@ -84,16 +86,16 @@ typedef struct{
 	unsigned int offset;     	//The start of the bitmap data
 	unsigned int hSize;  	 	//The size of the file header of this bitmap
 	unsigned int imgSize;	 	//The size of the bitmap data
-	unsigned int bpp;	 	//The amount of bits per pixel in this bitmap
+	unsigned int bpp;	 		//The amount of bits per pixel in this bitmap
 	unsigned int compression; 	//The compression used in this bitmap
 	int width;			//The width of this bitmap
 	int height;			//The height of this bitmap
 
 	byte padder;			//The byte used for padding by this bitmap
-	unsigned short padding; 	//The amount of padding bytes used in this bitmap
+	unsigned short padding; //The amount of padding bytes used in this bitmap
 	int headerParsed;		//Is 1 if the header has been parsed 0 otherwise
 
-	byte* data;			//The bitmap data of this bitmap
+	byte* data;				//The bitmap data of this bitmap
 	
 	ERROR_NO error;			//The error in this bitmap
 	FILE* fileHandle;		//The file handle of this bitmap

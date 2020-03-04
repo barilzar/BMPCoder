@@ -1,4 +1,4 @@
-#BMPcoder
+#BMPcoder 
 
 CC = gcc -ansi -pedantic -Wall -std=c99 -g
 

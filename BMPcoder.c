@@ -8,7 +8,7 @@
 //Prints a message explaining the use of this program.
 void help(){
 	printf("You must specify atleast 2 parameters.\n");
-	printf("The first must specify the operation to be conducted, decoding(-d) or encoding(-e). The second parameter must specify the file on wich the operation will be applied.\n");
+	printf("The first parameter must specify the operation to be conducted, decoding(-d) or encoding(-e). The second parameter must specify the file on wich the operation will be applied.\n");
 	printf("e.g.\nBMPcoder -e normalBitmap.bmp or\n");
 	printf("BMPcoder -d BMPwithMessage.bmp\n");
 }
@@ -116,7 +116,7 @@ void encodeOperation(char* fName){
 	free(buffer);
 }
 
-//Hadnles the operation for decoding a message.
+//Handles the operation for decoding a message.
 void decodeOperation(char* fName){
 	BMP_FILE* file = NULL;
 	char* message = NULL;

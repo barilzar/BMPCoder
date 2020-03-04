@@ -1,10 +1,10 @@
 /*
-Purpose: This library contains several byte level
-	 functions. Most of these are used for 
-	 encoding and decoding chars to some data.
-	 There are also a few functions for parsing
-	 datatypes from raw binary data.
-	char decode(byte*)
+Purpose: 
+	This library contains several byte level
+	functions. Most of these are used for 
+	encoding and decoding chars to some data.
+	There are also a few functions for parsing
+	datatypes from raw binary data.
 
 Functions:
 	void toBits(char, byte*)
