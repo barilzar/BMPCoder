@@ -1,6 +1,6 @@
 #BMPcoder 
 
-CC = gcc -ansi -pedantic -Wall -std=c99 -g
+CC = gcc -ansi -pedantic -Wall -Wextra -std=c99 -g
 
 BMPcoder: bitModul.o bmpFileParser.o BMPcoder.o
 	$(CC) -o BMPcoder bitModul.o bmpFileParser.o BMPcoder.o
