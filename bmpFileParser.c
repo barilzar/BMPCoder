@@ -193,7 +193,7 @@ int writeToFile(BMP_FILE* file, char* fname){
 	This way we don't need to worry about the validity of
 	the header if it has been changed.
 	*/
-	for(int i = 0; i < 14 + file->hSize; i++){
+	for(unsigned int i = 0; i < 14 + file->hSize; i++){
 		read = fgetc(file->fileHandle);
 		if(read == EOF){
 			NOT_VALID_ERROR(file);
