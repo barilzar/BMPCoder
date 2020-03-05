@@ -65,11 +65,11 @@ int parseHeader(BMP_FILE* file){
 	}
 
 	rewind(file->fileHandle);
-	byte buffer[18];
+	uint8_t buffer[18];
 
 	//Reads the first 18 bytes from the file to the buffer.
 	//fread returns the amount of bytes read wich we require to be 18.
-	if(fread(&buffer, sizeof(byte), 18, file->fileHandle) != 18){
+	if(fread(&buffer, sizeof(uint8_t), 18, file->fileHandle) != 18){
 		NOT_VALID_ERROR(file);
 	}
 
@@ -85,8 +85,8 @@ int parseHeader(BMP_FILE* file){
 
 	// We reserve space for the rest of the header
 	// and read the rest of the header data to it.
-	byte headerData[file->hSize];
-	if(fread(&headerData, sizeof(byte), file->hSize, file->fileHandle) != file->hSize){
+	uint8_t headerData[file->hSize];
+	if(fread(&headerData, sizeof(uint8_t), file->hSize, file->fileHandle) != file->hSize){
 		NOT_VALID_ERROR(file);
 	}
 
@@ -151,7 +151,7 @@ int parseData(BMP_FILE* file){
 			if((read = fgetc(file->fileHandle)) == EOF){
 				NOT_VALID_ERROR(file);
 			}
-			file->data[index] = (byte) read;
+			file->data[index] = (uint8_t) read;
 			index++;
 		}
 		//On the first line we will also read the byte used for padding:
@@ -159,7 +159,7 @@ int parseData(BMP_FILE* file){
 			if((read = fgetc(file->fileHandle)) == EOF){
 				NOT_VALID_ERROR(file);
 			}
-			file->padder = (byte) read;
+			file->padder = (uint8_t) read;
 			skipBytes(file->fileHandle, file->padding - 1);
 			continue;
 		}

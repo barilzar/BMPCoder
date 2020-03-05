@@ -1,3 +1,4 @@
+#include <stdint.h>
 /*
 Purpose:
 	This modul contains functions to help
@@ -91,11 +92,11 @@ typedef struct{
 	int width;			//The width of this bitmap
 	int height;			//The height of this bitmap
 
-	byte padder;			//The byte used for padding by this bitmap
+	uint8_t padder;			//The byte used for padding by this bitmap
 	unsigned short padding; //The amount of padding bytes used in this bitmap
 	int headerParsed;		//Is 1 if the header has been parsed 0 otherwise
 
-	byte* data;				//The bitmap data of this bitmap
+	uint8_t* data;			//The bitmap data of this bitmap
 	
 	ERROR_NO error;			//The error in this bitmap
 	FILE* fileHandle;		//The file handle of this bitmap

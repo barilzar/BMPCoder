@@ -2,19 +2,18 @@
 #include <string.h>
 #include "bitModul.h"
 
-void toBits(char c, byte* bits){
-	byte mask = 0x01;
+void toBits(char c, uint8_t* bits){
+	uint8_t mask = 0x01;
 
 	for(int i = 7; i >= 0; i--){
 		bits[i] = c & mask;
 		bits[i] >>= -(i - 7);
 		mask <<= 1;
 	}
-
 }
 
-char fromBits(byte* bits){
-	byte c = 0x00,
+char fromBits(uint8_t* bits){
+	uint8_t c = 0x00,
 	     bit;
 
 	for(int i = 0; i < 8; i++){
@@ -24,8 +23,8 @@ char fromBits(byte* bits){
 	return c;
 }
 
-void encode(byte* bytes, char c){
-	byte bits[8];
+void encode(uint8_t* bytes, char c){
+	uint8_t bits[8];
 	toBits(c, bits);
 
 	for(int i = 0; i < 8; i++){
@@ -38,8 +37,8 @@ void encode(byte* bytes, char c){
 	}
 }
 
-char decode(byte* bytes){
-	byte bits[8],
+char decode(uint8_t* bytes){
+	uint8_t bits[8],
 	     mask = 0x01;
 
 	for(int i = 0; i < 8; i++){
@@ -52,7 +51,7 @@ int isBigEndian(){
 	int i = 1;
 
 	//We convert the integer i to a byte array:
-	byte* p = (byte*) &i;
+	uint8_t* p = (uint8_t*) &i;
 
 	/* If this machine is little-endian the first byte
 	 * of the integer i will have it's least significand
@@ -66,11 +65,11 @@ int isBigEndian(){
 		return 1;
 }
 
-unsigned int toInteger(byte* bytes){
+unsigned int toInteger(uint8_t* bytes){
 	unsigned int i;
 
 	//We convert the integer i to a byte array:
-	byte* data = (byte*) &i;
+	uint8_t* data = (uint8_t*) &i;
 
 	//If this machine is little endian a simple copy is enough:
 	if(!isBigEndian()){
@@ -85,12 +84,12 @@ unsigned int toInteger(byte* bytes){
 	return i;
 }
 
-unsigned short toShort(byte* bytes){
+unsigned short toShort(uint8_t* bytes){
 	//This function is completely analogous to the 
 	//toInteger()-function
 
 	unsigned short s;
-	byte* data = (byte*) &s;
+	uint8_t* data = (uint8_t*) &s;
 
 	if(!isBigEndian()){
 		for(unsigned int j = 0; j < sizeof(short); j++)
@@ -103,7 +102,7 @@ unsigned short toShort(byte* bytes){
 	return s;
 }
 
-void encodeData(byte* area, char* message){
+void encodeData(uint8_t* area, char* message){
 	if(area == NULL || message == NULL)
 		return;
 
@@ -119,7 +118,7 @@ void encodeData(byte* area, char* message){
 	encode(&area[(i + 1) * 8], '\0');
 }
 
-char* decodeData(byte* area, int maxLenght){
+char* decodeData(uint8_t* area, int maxLenght){
 
 	char* message = malloc(sizeof(char) * maxLenght);
 	if(message == NULL)

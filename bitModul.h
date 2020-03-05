@@ -1,3 +1,4 @@
+#include <stdint.h>
 /*
 Purpose: 
 	This library contains several byte level
@@ -19,12 +20,6 @@ Functions:
 
 Dependancies: None.
 */
-
-/*
-Typedef is used to simplify the code. Instead of using unsigned 
-chars we can use the datatype we actually mean - the byte.
-*/
-typedef unsigned char byte;
 
 /********************************************
 Function: toBits(char, byte*)
@@ -59,7 +54,7 @@ Sample call: tobits('a', myArray)
 	     wich is what this function produces to the last 
 	     diagonal of myArray.
 *********************************************/
-void toBits(char, byte*);
+void toBits(char, uint8_t*);
 
 /********************************************
 Function: fromBits(byte*)
@@ -81,7 +76,7 @@ Error checking: Nothing.
 Sample call: char c = fromBits(myArray);
 	     The return value is allways case dependant.
 ********************************************/
-char fromBits(byte*);
+char fromBits(uint8_t*);
 
 /********************************************
 Function: encode(byte*, char)
@@ -115,7 +110,7 @@ Sample call: encode(myArray, 'a');
 	     will be replaced by bits representing the letter 'a'.
 	     The data in myArray will not be chanced in any ther way.
 ********************************************/
-void encode(byte*, char);
+void encode(uint8_t*, char);
 
 /********************************************
 Function: decode(byte*)
@@ -137,7 +132,7 @@ Error checking: Nothing.
 Sample call: char c = decode(myArray);
 	     The return value is allways case dependant.
 ********************************************/
-char decode(byte*);
+char decode(uint8_t*);
 
 /********************************************
 Function: isBigEndian()
@@ -183,7 +178,7 @@ Error checking: None.
 
 Sample call: unsigned int i = toInteger(myArray);
 ********************************************/
-unsigned int toInteger(byte*);
+unsigned int toInteger(uint8_t*);
 
 /********************************************
 Function: toShort(byte*)
@@ -206,7 +201,7 @@ Error checking: None.
 
 Sample call: unsigned short s = toShort(myArray);
 ********************************************/
-unsigned short toShort(byte*);
+unsigned short toShort(uint8_t*);
 
 /********************************************
 Function: encodeData(byte*, char*)
@@ -232,7 +227,7 @@ Error checking: None.
 
 Sample call: encodeData(myArray, "message to be encoded");
 ********************************************/
-void encodeData(byte*, char*);
+void encodeData(uint8_t*, char*);
 
 /********************************************
 Function: decodeData(byte*, int)
@@ -265,4 +260,4 @@ Error checking: None.
 
 Sample call: char* message = decodeData(myArray, myArrayL / 8)
 ********************************************/
-char* decodeData(byte*, int);
+char* decodeData(uint8_t*, int);
