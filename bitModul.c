@@ -14,7 +14,7 @@ void toBits(char c, uint8_t* bits){
 
 char fromBits(uint8_t* bits){
 	uint8_t c = 0x00,
-	     bit;
+			bit;
 
 	for(int i = 0; i < 8; i++){
 		bit = bits[i] << -(i - 7);
@@ -65,39 +65,39 @@ int isBigEndian(){
 		return 1;
 }
 
-unsigned int toInteger(uint8_t* bytes){
-	unsigned int i;
+uint32_t toUInt(uint8_t* bytes){
+	uint32_t i;
 
 	//We convert the integer i to a byte array:
 	uint8_t* data = (uint8_t*) &i;
 
 	//If this machine is little endian a simple copy is enough:
 	if(!isBigEndian()){
-		for(unsigned int j = 0; j < sizeof(int); j++)
+		for(unsigned int j = 0; j < sizeof(uint32_t); j++)
 			data[j] = bytes[j];
 	}
 	//If this machine is big-endian we need to reverse the bytes:
 	else{
-		for(unsigned int j = 0; j < sizeof(int); j++)
-			data[j] = bytes[sizeof(int)- 1 - j];
+		for(unsigned int j = 0; j < sizeof(uint32_t); j++)
+			data[j] = bytes[sizeof(uint32_t)- 1 - j];
 	}
 	return i;
 }
 
-unsigned short toShort(uint8_t* bytes){
+uint16_t toUShort(uint8_t* bytes){
 	//This function is completely analogous to the 
-	//toInteger()-function
+	//toUInt()-function
 
-	unsigned short s;
+	uint16_t s;
 	uint8_t* data = (uint8_t*) &s;
 
 	if(!isBigEndian()){
-		for(unsigned int j = 0; j < sizeof(short); j++)
+		for(unsigned int j = 0; j < sizeof(uint16_t); j++)
 			data[j] = bytes[j];
 	}
 	else{
-		for(unsigned int j = 0; j < sizeof(short); j++)
-			data[j] = bytes[sizeof(short)- 1 - j];
+		for(unsigned int j = 0; j < sizeof(uint16_t); j++)
+			data[j] = bytes[sizeof(uint16_t)- 1 - j];
 	}
 	return s;
 }

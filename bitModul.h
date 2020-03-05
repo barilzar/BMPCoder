@@ -108,7 +108,7 @@ Sample call: encode(myArray, 'a');
 	     myArray[7]= (xxxx xxx1)
 	     Basically the last bits of the bytes in myArray
 	     will be replaced by bits representing the letter 'a'.
-	     The data in myArray will not be chanced in any ther way.
+	     The data in myArray will not be chanced in any other way.
 ********************************************/
 void encode(uint8_t*, char);
 
@@ -157,31 +157,30 @@ Sample call: if(isBigEndina)
 int isBigEndian();
 
 /********************************************
-Function: toInteger(byte*)
+Function: toUInt(uint8_t*)
 
 Purpose: Turns the given LITTLE-ENDIAN byte array
-	 to the unsigned int -datatype used by
-	 this machine.
+	to unsigned 32 bit integer.
 
 Inputs: An array of bytes representing an unsigned
 	integer in little-endian format.
 	The array must have enough bytes to fill the
 	datatype, e.g. the amount specified by 
-	sizeof(unsigned int).
+	sizeof(uint32_t).
 	
-Returns: An unsigned integer with the value specified
-	 by the given byte array. 
+Returns: A 32 bit unsigned integer with the value specified
+	by the given byte array.
 
 Modifies: Nothing
 
 Error checking: None.
 
-Sample call: unsigned int i = toInteger(myArray);
+Sample call: uint32_t i = toUInt(myArray);
 ********************************************/
-unsigned int toInteger(uint8_t*);
+uint32_t toUInt(uint8_t*);
 
 /********************************************
-Function: toShort(byte*)
+Function: toUShort(byte*)
 
 Purpose: Returns an unsigned short value of the
 	 given little-endian byte array.
@@ -199,9 +198,9 @@ Modifies: Nothing.
 
 Error checking: None.
 
-Sample call: unsigned short s = toShort(myArray);
+Sample call: uint16_t s = toUShort(myArray);
 ********************************************/
-unsigned short toShort(uint8_t*);
+uint16_t toUShort(uint8_t*);
 
 /********************************************
 Function: encodeData(byte*, char*)

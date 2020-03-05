@@ -83,17 +83,17 @@ Usage: You should not create these structs manually. Instead you should
        functionality 
 ********************************************/
 typedef struct{
-	unsigned int fSize;      	//The file size of this bitmap
-	unsigned int offset;     	//The start of the bitmap data
-	unsigned int hSize;  	 	//The size of the file header of this bitmap
-	unsigned int imgSize;	 	//The size of the bitmap data
-	unsigned int bpp;	 		//The amount of bits per pixel in this bitmap
-	unsigned int compression; 	//The compression used in this bitmap
-	int width;			//The width of this bitmap
-	int height;			//The height of this bitmap
+	uint32_t fSize;      	//The file size of this bitmap
+	uint32_t offset;     	//The start of the bitmap data
+	uint32_t hSize;  	 	//The size of the file header of this bitmap
+	uint32_t imgSize;	 	//The size of the bitmap data
+	int16_t  bpp;	 		//The amount of bits per pixel in this bitmap
+	uint32_t compression; 	//The compression used in this bitmap
+	int32_t  width;			//The width of this bitmap
+	int32_t  height;		//The height of this bitmap
 
 	uint8_t padder;			//The byte used for padding by this bitmap
-	unsigned short padding; //The amount of padding bytes used in this bitmap
+	uint16_t padding; 		//The amount of padding bytes used in this bitmap
 	int headerParsed;		//Is 1 if the header has been parsed 0 otherwise
 
 	uint8_t* data;			//The bitmap data of this bitmap

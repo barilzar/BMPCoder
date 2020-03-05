@@ -55,15 +55,6 @@ int parseHeader(BMP_FILE* file){
 		NULL_FILE_ERROR(file);
 	}
 
-	if(sizeof(int) != 4 || sizeof(short) != 2){
-		/* Incase that the size of the used datatypes are
-		*  of the wrong size we will simply cause an error.
-		*  It is much more easier than trying to determine a
-		*  suitable datatype at runtime.
-		*/
-		MEMORY_FORMAT_ERROR(file);
-	}
-
 	rewind(file->fileHandle);
 	uint8_t buffer[18];
 
@@ -79,9 +70,9 @@ int parseHeader(BMP_FILE* file){
 	}
 
 	//The first part of the header parsing:
-	file->fSize = toInteger(&buffer[2]);
-	file->offset = toInteger(&buffer[10]);
-	file->hSize = toInteger(&buffer[14]);
+	file->fSize  = toUInt(&buffer[2]);
+	file->offset = toUInt(&buffer[10]);
+	file->hSize  = toUInt(&buffer[14]);
 
 	// We reserve space for the rest of the header
 	// and read the rest of the header data to it.
@@ -91,11 +82,11 @@ int parseHeader(BMP_FILE* file){
 	}
 
 	//The final part of the header parsing:
-	file->width = toInteger(&headerData[0]);
-	file->height = toInteger(&headerData[4]);
-	file->bpp = toShort(&headerData[10]);
-	file->compression = toInteger(&headerData[12]);
-	file->imgSize = toInteger(&headerData[16]);
+	file->width 	  = toUInt(&headerData[0]);
+	file->height 	  = toUInt(&headerData[4]);
+	file->bpp 		  = toUShort(&headerData[10]);
+	file->compression = toUInt(&headerData[12]);
+	file->imgSize 	  = toUInt(&headerData[16]);
 
 	/* Each line of a bmp file is padded to be divisible by 32.
 	 * The following formula counts the amount of bytes needed
