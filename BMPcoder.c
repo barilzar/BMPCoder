@@ -1,4 +1,3 @@
-#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <strings.h>
@@ -27,31 +26,31 @@ void error(BMP_FILE* file){
 			break;
 		
 		case NOT_VALID_BITMAP_ERROR :
-			printf("The file supplied to the program was not a valid bitmap file. Either the file was not a bitmap file at all, or it was of an unsupported format.\nIt is also possible that the file has allready got a message encoded within.\n");
+			puts("The file supplied to the program was not a valid bitmap file. Either the file was not a bitmap file at all, or it was of an unsupported format.\nIt is also possible that the file has allready got a message encoded within.\n");
 			break;
 
 		case NULL_FILE_ERROR :
-			printf("Internal program error.\nThe filehandle within the BMP_FILE struct was NULL.\n");
+			puts("Internal program error.\nThe filehandle within the BMP_FILE struct was NULL.\n");
 			break;
 
 		case UNSUPPORTED_MEMORY_FORMAT_ERROR :
-			printf("The current machine architecture used does not support the functions used by this program. Running this program successfully is impossible.\n");
+			puts("The current machine architecture used does not support the functions used by this program. Running this program successfully is impossible.\n");
 			break;
 
 		case MEMORY_ALLOCATION_ERROR :
-			printf("There is not enough free memory on the system for the program to function properly. Consider trying to free some memory and then trying again.\n");
+			puts("There is not enough free memory on the system for the program to function properly. Consider trying to free some memory and then trying again.\n");
 			break;
 
 		case FILE_WRITING_ERROR:
-			printf("There was an error while writing to a file. Check that the currently open directory does not have a file named encodedBitmap.bmp inside.\n");
+			puts("There was an error while writing to a file. Check that the currently open directory does not have a file named encodedBitmap.bmp inside.\n");
 			break;
 
 		case HEADER_NOT_PARSED :
-			printf("Internal program error.\nA function that requires the BMP_FILE's header to be parsed received a BMP_FILE wichs header was not parsesd.\n");
+			puts("Internal program error.\nA function that requires the BMP_FILE's header to be parsed received a BMP_FILE wichs header was not parsesd.\n");
 			break;
 
 		default:
-			printf("Internal program error.\nError function called on a BMP_FILE with an unknown value in the error variable.\n");
+			puts("Internal program error.\nError function called on a BMP_FILE with an unknown value in the error variable.\n");
 	}
 
 	closeBmp(file);
@@ -89,22 +88,21 @@ void encodeOperation(char* fName){
 		return;
 
 	unsigned int maxLenght = dataSize(file) / 8 ;
-	int rValue = 0;
-	char* buffer = NULL;
-	size_t n = 0;
-
-	while(1){
-		printf("Please enter the message to be encoded (max. %u characters)\n", maxLenght);
 	
-		rValue = getline(&buffer, &n, stdin);
-		if(rValue < 0){//Error while reading from stdin
-			printf("There was an error while reading the input.\n Terminating program.\n");
-			exit(EXIT_FAILURE);
-		}
-		else if(rValue > maxLenght){//Message was too long
-			printf("The message entered was too long.\nMax. characters %u, entered characters %i\n", maxLenght, rValue);
-		}//message was ok
-		else break;
+	char* buffer = malloc(maxLenght);
+	if(buffer == NULL){
+
+		puts("Not enough memory available for operations.\nTerminating program.");
+		return;
+	}
+	
+	printf("Please enter the message to be encoded (max. %u characters)\n", maxLenght);
+	fgets(buffer, maxLenght, stdin);
+
+	if(buffer == NULL){
+		//Error while reading from stdin
+		puts("There was an error while reading the input.\nTerminating program.\n");
+		exit(EXIT_FAILURE);
 	}
 
 	encodeData(file->data, buffer);
@@ -112,6 +110,7 @@ void encodeOperation(char* fName){
 		error(file);
 		return;
 	}
+
 	closeBmp(file);
 	free(buffer);
 }
